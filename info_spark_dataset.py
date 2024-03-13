@@ -1,4 +1,8 @@
 from pyspark.sql import DataFrame
+import pyspark.sql.functions as F
+from pyspark.sql.types import *
+import pyspark.sql as PySql
+
 
 class InfoDataSet(DataFrame):
     """
@@ -26,6 +30,9 @@ class InfoDataSet(DataFrame):
         Note: This constructor inherits the constructor of the PySpark DataFrame class.
         """
         super(InfoDataSet, self).__init__(*args, **kwargs)
+        self.cols = DataFrame.columns
+        self.ros = DataFrame.count()
+        self.shape = (len(self.cols), self.ros)
     
     def display_columns(self):
         """
@@ -42,3 +49,6 @@ class InfoDataSet(DataFrame):
         print('Column:')
         for index, column in enumerate(columns, start=1):
             print(f"\t{index}.- {column}")
+
+
+
